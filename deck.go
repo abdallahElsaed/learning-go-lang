@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 type deck []string 
@@ -27,4 +28,14 @@ func (d deck) print(){
 
 func partition(d deck, first int , second int) deck{
 	return d[first:second]
+}
+
+/* I want to save Deck slice in Hard Disk 
+	1. Slice of string must convert to Slice of byte []byte
+	2. to convert it you must convert []string to string before
+*/
+
+// 1. convert to string
+func (d deck) toString () string{
+	return strings.Join(d , ", ")
 }
