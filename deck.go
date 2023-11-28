@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -37,5 +38,12 @@ func partition(d deck, first int , second int) deck{
 
 // 1. convert to string
 func (d deck) toString () string{
-	return strings.Join(d , ", ")
+	return strings.Join(d , ",\n ")
 }
+
+// 2. save to hard disk 
+
+func (d deck) saveToFile(filename string) error {
+	return os.WriteFile( filename , []byte(d.toString()),0777)
+}
+
