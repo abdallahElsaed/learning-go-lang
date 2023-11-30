@@ -1,6 +1,7 @@
 package main
 
 import (
+	"math/rand"
 	"fmt"
 	"os"
 	"strings"
@@ -47,3 +48,27 @@ func (d deck) saveToFile(filename string) error {
 	return os.WriteFile( filename , []byte(d.toString()),0777)
 }
 
+func newDeckFromFile( filename string) deck {
+	bs , err := os.ReadFile(filename)
+	if err != nil {
+		fmt.Println("Error:" , err)
+		os.Exit(1)
+	}
+	// convert to slice 
+	s := strings.Split(string(bs) , ",\n ")
+	return deck(s) 
+}
+
+/*
+	I want to make shuffling for slice or cheng position for all slice element
+		1. I will loop for slice 
+		2. make random number 
+		3. cheng element of this slice by his index and random number
+*/
+
+func (d deck) shuffle(){
+	for  i := range d{
+		newPosition := rand.Intn(len(d) -1)
+		d[i] , d[newPosition] = d[newPosition] , d[i]
+	}
+}
