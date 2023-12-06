@@ -1,10 +1,11 @@
 package main
 
 import (
-	"math/rand"
 	"fmt"
+	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 type deck []string 
@@ -60,15 +61,18 @@ func newDeckFromFile( filename string) deck {
 }
 
 /*
-	I want to make shuffling for slice or cheng position for all slice element
+	I want to make shuffling for slice or change position for all slice element
 		1. I will loop for slice 
 		2. make random number 
-		3. cheng element of this slice by his index and random number
+		3. change element of this slice by his index and random number
 */
 
 func (d deck) shuffle(){
+
+	// rand.Shuffle(len(d), func(i, j int) { d[i], d[j] = d[j], d[i] })
+		r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	for  i := range d{
-		newPosition := rand.Intn(len(d) -1)
+		newPosition := r.Intn(len(d) -1)
 		d[i] , d[newPosition] = d[newPosition] , d[i]
 	}
 }
